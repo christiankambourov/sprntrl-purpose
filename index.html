@@ -98,9 +98,21 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
 .db-score{font-family:var(--ff-d);font-size:14px;font-weight:700;width:28px;text-align:right;flex-shrink:0}
 
 /* ─── EMAIL CAPTURE ─── */
-.email-gate{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:28px 24px;margin-top:8px;text-align:center}
-.email-gate h3{font-family:var(--ff-d);font-size:18px;font-weight:600;margin-bottom:6px}
-.email-gate p{font-size:13px;color:var(--dim);margin-bottom:20px;line-height:1.5}
+.email-gate{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(199,173,88,.07) 0%,rgba(30,29,27,0) 46%),var(--bg3);border:1px solid rgba(199,173,88,.28);border-radius:16px;padding:36px 28px 26px;margin-top:8px;text-align:center;box-shadow:0 1px 0 rgba(224,207,136,.08) inset,0 24px 60px -30px rgba(0,0,0,.8)}
+.email-gate::before{content:"";position:absolute;top:0;left:50%;width:56%;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,var(--gold3),transparent);opacity:.75}
+.email-gate .eyebrow,.freeform-section .eyebrow{font-family:var(--ff-b);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.freeform-section .eyebrow span{color:var(--dim);letter-spacing:.14em}
+.email-gate h3{font-family:var(--ff-d);font-size:28px;font-weight:500;line-height:1.15;color:var(--cream);margin-bottom:10px;letter-spacing:-.01em}
+.email-gate .gate-sub{font-size:14px;color:var(--muted);margin:0 auto 22px;line-height:1.6;max-width:380px}
+.email-gate .fine-print{font-size:11px;color:var(--dim);margin:14px auto 0;line-height:1.55;max-width:360px}
+#nativeGate iframe{border-radius:10px}
+#captureStatus:empty{min-height:0!important;margin:0}
+#captureSection h2#captureTitle{text-align:center}
+.gold-btn{margin-top:16px;width:100%;padding:16px 24px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#0C0B0A;border:none;border-radius:10px;font-family:var(--ff-b);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:transform .2s,box-shadow .2s,filter .2s;box-shadow:0 10px 30px -14px rgba(199,173,88,.6)}
+.gold-btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.gold-btn:focus-visible,.skip-link:focus-visible{outline:2px solid var(--gold3);outline-offset:3px}
+.skip-link{display:block;margin:14px auto 0;background:none;border:0;padding:6px 10px;font-family:var(--ff-b);font-size:13px;color:var(--muted);text-decoration:underline;text-decoration-color:rgba(168,162,158,.35);text-underline-offset:4px;cursor:pointer}
+.skip-link:hover{color:var(--cream)}
 .email-row{display:flex;gap:10px}
 .email-row input{flex:1;padding:13px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--cream);font-family:var(--ff-b);font-size:14px;-webkit-appearance:none}
 .email-row input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(199,173,88,.12)}
@@ -196,22 +208,25 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
 <div class="wrap"><div class="quiz-card fade-in">
 <h2 id="captureTitle">Your assessment is complete.</h2>
     <div class="freeform-section" id="freeformSection">
-      <h3>One more question. This one matters most.</h3>
-      <p>Take a moment. Be honest with yourself.</p>
+      <p class="eyebrow">One last thing <span>· Optional</span></p>
+      <h3>This one matters most.</h3>
+      <p>Take a moment. Be honest with yourself. Or skip it and see your results.</p>
       <p style="font-family:var(--ff-d);font-size:17px;color:var(--cream);font-style:italic;margin-bottom:16px;line-height:1.4">"In one sentence, what would change in your life if you were fully walking in your purpose?"</p>
       <textarea class="freeform-textarea" id="freeformAnswer" placeholder="Write whatever comes to mind. There's no wrong answer." maxlength="500"></textarea>
-      <button class="submit-btn" id="freeformSubmit" onclick="submitFreeform()" style="margin-top:16px;width:100%;padding:15px 24px;background:var(--gold);color:#0C0B0A;border:none;border-radius:10px;font-family:var(--ff-b);font-size:15px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s">Continue</button>
+      <button class="gold-btn" id="freeformSubmit" onclick="submitFreeform()">Continue</button>
+      <button type="button" class="skip-link" onclick="submitFreeform()">Skip this question</button>
     </div>
 
 
 <div class="email-gate" id="emailGate" style="display:none">
-<h3>See your results</h3>
-<p>Join Christian’s email list to see your results here. We’re collecting signups now; no results email or course lessons are sent at this stage. Your answers and reflection stay in this browser.</p>
+<p class="eyebrow">Your results are ready</p>
+<h3>Unlock your results</h3>
+<p class="gate-sub">Enter your email to see where you stand across all seven areas of your life. Your answers stay in this browser.</p>
 <form id="mockEmailForm" onsubmit="submitEmail(event)"><label for="emailInput">Email address</label>
 <div class="email-row"><input type="email" name="email_address" id="emailInput" autocomplete="email" placeholder="Your email address" maxlength="254" required>
 <button id="emailSubmit" type="submit">Join list &amp; see results</button></div></form>
 <div id="nativeGate" hidden></div>
-<p style="font-size:12px;margin-top:14px">By submitting, you’re signing up for Christian’s email list, including if you previously unsubscribed. You can unsubscribe from future emails anytime.</p>
+<p class="fine-print">By continuing, you’re joining Christian’s email list, including if you previously unsubscribed. Unsubscribe anytime.</p>
 <p id="captureStatus" role="status" aria-live="polite" style="color:var(--coral);font-size:14px;min-height:24px"></p>
 </div>
 </div></div></section>
@@ -235,8 +250,8 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
     <div class="domain-bars" id="domainBars"></div>
     
     <div class="success-msg" id="successMsg">
-      <h3>Your results are ready.</h3>
-      <p>Your results are shown here. No email or course lessons have been sent.</p>
+      <h3>You’re on the list.</h3>
+      <p>Check your inbox to confirm your email, so my notes reach you.</p>
       
       <div style="margin-top:24px;padding:20px;background:var(--bg3,#1E1D1B);border:1px solid var(--border,#3A3734);border-radius:10px;">
         <p style="font-size:13px;color:var(--text2,#A8A29E);margin-bottom:16px;">Share the assessment with someone who might find it useful.</p>
@@ -376,7 +391,7 @@ function finishCapture(receipt) {
   document.getElementById('successMsg').classList.add('active');
   document.querySelector('#successMsg p').textContent = receipt.mode === 'preview'
     ? 'Preview only: simulated signup. No address was stored with Kit and no email was sent.'
-    : 'Kit accepted your signup. Your results are shown here. No results email or course lessons have been sent.';
+    : 'Check your inbox to confirm your email, so my notes reach you.';
 }
 async function openNativeGate() {
   const mode = window.PURPOSE_CAPTURE_MODE || 'unconfigured';
@@ -532,12 +547,6 @@ function showResults() {
 }
 
 function submitFreeform() {
-  const answer = document.getElementById('freeformAnswer').value;
-  if (!answer || answer.length < 5) {
-    document.getElementById('freeformAnswer').style.borderColor = 'var(--coral,#C2675A)';
-    document.getElementById('freeformAnswer').setAttribute('placeholder', 'Please share your answer before continuing.');
-    return;
-  }
   document.getElementById('freeformSection').style.display = 'none';
   saveDraft();
   document.getElementById('emailGate').style.display = 'block';
@@ -603,7 +612,7 @@ async function submitEmail(event) {
 // Keep a completed assessment across reloads without sending it to Kit.
 try {
   const draft = JSON.parse(sessionStorage.getItem(draftKey));
-  if (draft && Array.isArray(draft.answers) && draft.answers.length === questions.length && draft.answers.every(n => Number.isInteger(n) && n >= 1 && n <= 5) && typeof draft.reflection === 'string' && draft.reflection.length >= 5) {
+  if (draft && Array.isArray(draft.answers) && draft.answers.length === questions.length && draft.answers.every(n => Number.isInteger(n) && n >= 1 && n <= 5) && typeof draft.reflection === 'string') {
     answers = draft.answers;
     currentQ = questions.length;
     document.getElementById('heroSection').style.display = 'none';
