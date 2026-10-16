@@ -43,7 +43,7 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
 .hero h1{font-family:var(--ff-d);font-weight:900;font-size:clamp(32px,4.2vw,52px);line-height:1.08;color:var(--cream);margin-bottom:20px;letter-spacing:-.02em}
 .hero h1 em{font-style:normal;color:var(--gold2)}
 .hero .sub{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:36px;max-width:460px}
-.hero .cta-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:var(--gold);color:var(--cream);border:none;border-radius:10px;font-family:var(--ff-b);font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.hero .cta-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#0C0B0A;border:none;border-radius:10px;font-family:var(--ff-b);font-size:15px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .hero .cta-btn:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(199,173,88,.3)}
 .hero .cta-btn svg{width:18px;height:18px}
 .hero-photo{position:relative}
@@ -150,12 +150,28 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
   .hero .sub{max-width:100%;margin-left:auto;margin-right:auto}
   .pillars{justify-content:center;flex-wrap:wrap}
   .hero .cta-btn{width:100%;justify-content:center}
+  /* Phones: photo becomes a short banner; headline and start button above the fold */
+  .hero{align-items:flex-start;padding-top:20px}
+  .hero-grid{gap:22px}
+  .hero-grid > div:first-child{display:flex;flex-direction:column;align-items:center}
+  .hero-tag{margin-bottom:14px}
+  .hero h1{font-size:clamp(30px,8.6vw,40px);margin-bottom:18px}
+  .hero .cta-btn{order:3;margin-bottom:22px}
+  .hero .sub{order:4;margin-bottom:18px;font-size:15px;line-height:1.65}
+  .pillars{order:5}
+  .hero-photo{max-width:420px;width:100%}
+  .hero-photo img{max-height:34vh;max-height:34svh;object-position:center 18%}
+  .hero-quote{bottom:12px;left:16px;right:16px}
+  .hero-quote p{font-size:12px}
 }
 @media(max-width:480px){
   .quiz-card{padding:32px 24px}
   .email-row{flex-direction:column}
   .email-row button{width:100%}
   .db-name{width:80px;font-size:11px}
+  #captureSection .quiz-card{padding:28px 14px}
+  .email-gate{padding:28px 16px 20px;border-radius:14px}
+  .email-gate h3{font-size:26px}
 }
 </style>
 <!-- Assessment answers remain local. -->
