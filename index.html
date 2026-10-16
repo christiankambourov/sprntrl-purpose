@@ -8,6 +8,7 @@
 <meta name="keywords" content="purpose clarity, life alignment, find your purpose, personal development, purpose driven life, faith and purpose, daily system, intentional living, SPRNTRL, Beacon OS">
 <meta name="author" content="SPRNTRL">
 <meta name="robots" content="index, follow">
+<meta name="build-id" content="20261007-kit-gate-v1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Purpose Clarity Assessment — SPRNTRL">
 <meta property="og:description" content="Discover where you are on your purpose journey. A free 2-minute assessment across 7 areas of your life.">
@@ -145,17 +146,8 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
   .db-name{width:80px;font-size:11px}
 }
 </style>
-<!-- Meta Pixel Code — Replace YOUR_PIXEL_ID with your actual Meta Pixel ID -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','YOUR_PIXEL_ID');
-fbq('track','PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+<!-- Assessment answers remain local. -->
+
 
 </head>
 <body>
@@ -199,6 +191,31 @@ fbq('track','PageView');
 </div>
 </section>
 
+<!-- Email gate precedes all result rendering. -->
+<section class="section results-section" id="captureSection" aria-labelledby="captureTitle">
+<div class="wrap"><div class="quiz-card fade-in">
+<h2 id="captureTitle">Your assessment is complete.</h2>
+    <div class="freeform-section" id="freeformSection">
+      <h3>One more question. This one matters most.</h3>
+      <p>Take a moment. Be honest with yourself.</p>
+      <p style="font-family:var(--ff-d);font-size:17px;color:var(--cream);font-style:italic;margin-bottom:16px;line-height:1.4">"In one sentence, what would change in your life if you were fully walking in your purpose?"</p>
+      <textarea class="freeform-textarea" id="freeformAnswer" placeholder="Write whatever comes to mind. There's no wrong answer." maxlength="500"></textarea>
+      <button class="submit-btn" id="freeformSubmit" onclick="submitFreeform()" style="margin-top:16px;width:100%;padding:15px 24px;background:var(--gold);color:#0C0B0A;border:none;border-radius:10px;font-family:var(--ff-b);font-size:15px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s">Continue</button>
+    </div>
+
+
+<div class="email-gate" id="emailGate" style="display:none">
+<h3>See your results</h3>
+<p>Join Christian’s email list to see your results here. We’re collecting signups now; no results email or course lessons are sent at this stage. Your answers and reflection stay in this browser.</p>
+<form id="mockEmailForm" onsubmit="submitEmail(event)"><label for="emailInput">Email address</label>
+<div class="email-row"><input type="email" name="email_address" id="emailInput" autocomplete="email" placeholder="Your email address" maxlength="254" required>
+<button id="emailSubmit" type="submit">Join list &amp; see results</button></div></form>
+<div id="nativeGate" hidden></div>
+<p style="font-size:12px;margin-top:14px">By submitting, you’re signing up for Christian’s email list, including if you previously unsubscribed. You can unsubscribe from future emails anytime.</p>
+<p id="captureStatus" role="status" aria-live="polite" style="color:var(--coral);font-size:14px;min-height:24px"></p>
+</div>
+</div></div></section>
+
 <!-- ═══ RESULTS ═══ -->
 <section class="section results-section" id="resultsSection">
 <div class="wrap">
@@ -217,30 +234,12 @@ fbq('track','PageView');
     <div class="result-body" id="resultBody"></div>
     <div class="domain-bars" id="domainBars"></div>
     
-    <div class="freeform-section" id="freeformSection">
-      <h3>One more question. This one matters most.</h3>
-      <p>Take a moment. Be honest with yourself.</p>
-      <p style="font-family:var(--ff-d);font-size:17px;color:var(--cream);font-style:italic;margin-bottom:16px;line-height:1.4">"In one sentence, what would change in your life if you were fully walking in your purpose?"</p>
-      <textarea class="freeform-textarea" id="freeformAnswer" placeholder="Write whatever comes to mind. There's no wrong answer." maxlength="500"></textarea>
-      <button class="submit-btn" id="freeformSubmit" onclick="submitFreeform()" style="margin-top:16px;width:100%;padding:15px 24px;background:var(--gold);color:#0C0B0A;border:none;border-radius:10px;font-family:var(--ff-b);font-size:15px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .3s">Continue</button>
-    </div>
-    
-    <div class="email-gate" id="emailGate" style="display:none">
-      <h3>Get your personalized 7-day challenge</h3>
-      <p>I'll send you one alignment practice each morning for the next 7 days. One domain per day. 3 minutes each. Built around your results. No spam, just purpose.</p>
-      <div class="email-row">
-        <input type="email" id="emailInput" placeholder="Your email address" required>
-        <button onclick="submitEmail()">I'm In</button>
-      </div>
-      <div class="trust-line">No spam, ever &middot; Unsubscribe anytime &middot; Your data stays yours</div>
-    </div>
-    
     <div class="success-msg" id="successMsg">
-      <h3>You're in.</h3>
-      <p>Check your inbox tomorrow morning at 7 AM for Day 1 of your alignment challenge. The fact that you took this assessment means you're already further along than most people. Talk soon.</p>
+      <h3>Your results are ready.</h3>
+      <p>Your results are shown here. No email or course lessons have been sent.</p>
       
       <div style="margin-top:24px;padding:20px;background:var(--bg3,#1E1D1B);border:1px solid var(--border,#3A3734);border-radius:10px;">
-        <p style="font-size:13px;color:var(--text2,#A8A29E);margin-bottom:16px;">Share your results and help someone else discover where they stand.</p>
+        <p style="font-size:13px;color:var(--text2,#A8A29E);margin-bottom:16px;">Share the assessment with someone who might find it useful.</p>
         <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;" id="shareButtons">
           <button onclick="shareToFacebook()" style="padding:10px 18px;background:#1877F2;color:white;border:none;border-radius:8px;font-family:var(--ff-b);font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -360,6 +359,42 @@ const questions = [
 
 let currentQ = 0;
 let answers = [];
+let transitioning = false;
+let captureConfirmed = false;
+let submitting = false;
+let submissionKey = null;
+let submissionPayload = null;
+let nativeMounted = false;
+let nativeCaptureState = 'idle';
+const draftKey = 'purpose-assessment-draft-v1:' + (window.PURPOSE_CAPTURE_MODE || 'unconfigured');
+function saveDraft() {
+  try { sessionStorage.setItem(draftKey, JSON.stringify({answers, reflection:document.getElementById('freeformAnswer').value, state:nativeCaptureState})); } catch {}
+}
+function finishCapture(receipt) {
+  captureConfirmed = true;
+  showResults();
+  document.getElementById('successMsg').classList.add('active');
+  document.querySelector('#successMsg p').textContent = receipt.mode === 'preview'
+    ? 'Preview only: simulated signup. No address was stored with Kit and no email was sent.'
+    : 'Kit accepted your signup. Your results are shown here. No results email or course lessons have been sent.';
+}
+async function openNativeGate() {
+  const mode = window.PURPOSE_CAPTURE_MODE || 'unconfigured';
+  if (mode === 'mock' || nativeMounted) return;
+  nativeMounted = true;
+  document.getElementById('mockEmailForm').hidden = true;
+  const container = document.getElementById('nativeGate');
+  container.hidden = false;
+  try {
+    const {mountNativeGate} = await import('/lib/native-gate.mjs');
+    mountNativeGate({container, mock:mode === 'native-mock', initialState:nativeCaptureState,
+      onState:state => { nativeCaptureState = state; saveDraft(); },
+      onAccepted:finishCapture});
+  } catch {
+    document.getElementById('captureStatus').textContent = 'Signup could not load. Your answers are still here. Please reload to try loading it again.';
+  }
+}
+
 
 function startQuiz() {
   document.getElementById('heroSection').style.display = 'none';
@@ -399,16 +434,21 @@ function renderQuestion() {
 }
 
 function selectAnswer(val, el) {
+  if (transitioning) return;
+  transitioning = true;
   document.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
   answers[currentQ] = val;
   
   setTimeout(() => {
     currentQ++;
+    transitioning = false;
     if (currentQ < questions.length) {
       renderQuestion();
     } else {
-      showResults();
+      document.getElementById('quizSection').classList.remove('active');
+      document.getElementById('captureSection').classList.add('active');
+      document.getElementById('freeformAnswer').focus();
     }
   }, 400);
 }
@@ -417,6 +457,8 @@ function selectAnswer(val, el) {
 let quizResults = {};
 
 function showResults() {
+  if (!captureConfirmed) return;
+  document.getElementById('captureSection').classList.remove('active');
   document.getElementById('quizSection').classList.remove('active');
   document.getElementById('resultsSection').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -427,8 +469,7 @@ function showResults() {
   // Store for later submission
   quizResults = { avg, answers: [...answers] };
   
-  // Track quiz completion with Meta Pixel
-  if (typeof fbq !== 'undefined') fbq('track', 'CompleteRegistration', { value: parseFloat(avg), content_name: 'Purpose Clarity Assessment' });
+
   
   // Animate score ring
   const circ = document.getElementById('scoreCircle');
@@ -498,7 +539,9 @@ function submitFreeform() {
     return;
   }
   document.getElementById('freeformSection').style.display = 'none';
+  saveDraft();
   document.getElementById('emailGate').style.display = 'block';
+  openNativeGate();
   document.getElementById('emailGate').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
@@ -507,85 +550,74 @@ function submitFreeform() {
 
 // Freeform uses submit button - email gate shows after submitFreeform()
 
-function submitEmail() {
-  const email = document.getElementById('emailInput').value;
-  if (!email || !email.includes('@')) { 
-    document.getElementById('emailInput').style.borderColor = 'var(--coral)';
-    return; 
+async function submitEmail(event) {
+  event.preventDefault();
+  if (submitting || captureConfirmed) return;
+  const input = document.getElementById('emailInput');
+  if (!input.reportValidity()) return;
+  const email = input.value.trim().toLowerCase();
+  const mode = window.PURPOSE_CAPTURE_MODE || 'unconfigured';
+  const status = document.getElementById('captureStatus');
+  if (mode === 'kit-disabled' || mode === 'unconfigured') {
+    status.textContent = 'Live signup testing is disabled. No address has been submitted.';
+    return;
   }
-  
-  const freeformAnswer = document.getElementById('freeformAnswer').value || '';
-  
-  // Track lead with Meta Pixel
-  if (typeof fbq !== 'undefined') fbq('track', 'Lead', { content_name: 'Purpose Assessment Email Capture' });
-  
-  // ═══ KIT INTEGRATION ═══
-  // Replace this URL with YOUR Kit form's action URL
-  const KIT_FORM_URL = 'https://app.kit.com/forms/9221323/subscriptions';
-  
-  // Send to Kit
-  fetch(KIT_FORM_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({ email_address: email })
-  }).catch(() => {
-    // Fallback if CORS blocks: open in new tab
-    window.open(KIT_FORM_URL + '?email_address=' + encodeURIComponent(email), '_blank');
-  });
-  
-  // ═══ GOOGLE SHEETS INTEGRATION ═══
-  // To set up Google Sheets data storage:
-  // 1. Create a Google Sheet with columns: Timestamp, Email, Overall Score, Faith, Purpose, Health, Relationships, Finances, Growth, Consistency, Strongest, Weakest, Freeform Answer
-  // 2. Go to Extensions > Apps Script
-  // 3. Paste this code and deploy as Web App (execute as you, access: anyone):
-  //
-  //    function doPost(e) {
-  //      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  //      var data = JSON.parse(e.postData.contents);
-  //      sheet.appendRow([
-  //        new Date(), data.email, data.score,
-  //        data.faith, data.purpose, data.health, data.relationships,
-  //        data.finances, data.growth, data.consistency,
-  //        data.strongest, data.weakest, data.freeform
-  //      ]);
-  //      return ContentService.createTextOutput('OK');
-  //    }
-  //
-  // 4. Copy the Web App URL and replace GOOGLE_SHEET_URL below
-  
-  const GOOGLE_SHEET_URL = 'GOOGLE_SHEET_URL_HERE'; // Replace with your Apps Script Web App URL
-  
-  if (GOOGLE_SHEET_URL !== 'GOOGLE_SHEET_URL_HERE') {
-    fetch(GOOGLE_SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email: email,
-        score: quizResults.avg,
-        faith: quizResults.answers[0],
-        purpose: quizResults.answers[1],
-        health: quizResults.answers[2],
-        relationships: quizResults.answers[3],
-        finances: quizResults.answers[4],
-        growth: quizResults.answers[5],
-        consistency: quizResults.answers[6],
-        strongest: quizResults.strongest,
-        weakest: quizResults.weakest,
-        freeform: freeformAnswer
-      })
-    }).catch(() => {});
+  // Only this explicit signup consent and email enter the mock endpoint.
+  // Native Kit receives email and its standard form metadata; assessment values stay local.
+  const payload = JSON.stringify({ email, signupConsent: true });
+  if (payload !== submissionPayload) {
+    submissionPayload = payload;
+    submissionKey = crypto.randomUUID();
   }
-  
-  // Show success
-  document.getElementById('freeformSection').style.display = 'none';
-  document.getElementById('emailGate').style.display = 'none';
-  document.getElementById('successMsg').classList.add('active');
+  submitting = true;
+  input.disabled = true;
+  const button = document.getElementById('emailSubmit');
+  button.disabled = true;
+  button.textContent = 'Saving…';
+  status.textContent = '';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
+  try {
+    let receipt;
+    if (mode === 'mock') {
+      const response = await fetch('/api/assessment', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': submissionKey },
+        body: payload, signal: controller.signal, credentials: 'same-origin'
+      });
+      receipt = await response.json();
+      if (!response.ok || receipt.accepted !== true || typeof receipt.receiptId !== 'string' || !receipt.receiptId.trim() || receipt.mode !== 'preview') throw new Error('Not confirmed');
+      if (!['localhost','127.0.0.1'].includes(location.hostname)) throw new Error('Invalid preview');
+    } else throw new Error('Unconfigured');
+    finishCapture(receipt);
+  } catch {
+    status.textContent = 'We couldn’t confirm your submission. Your answers are still here. Please try again.';
+  } finally {
+    clearTimeout(timeout);
+    submitting = false;
+    input.disabled = false;
+    button.disabled = false;
+    button.textContent = 'Join list & see results';
+  }
 }
+
+// Keep a completed assessment across reloads without sending it to Kit.
+try {
+  const draft = JSON.parse(sessionStorage.getItem(draftKey));
+  if (draft && Array.isArray(draft.answers) && draft.answers.length === questions.length && draft.answers.every(n => Number.isInteger(n) && n >= 1 && n <= 5) && typeof draft.reflection === 'string' && draft.reflection.length >= 5) {
+    answers = draft.answers;
+    currentQ = questions.length;
+    document.getElementById('heroSection').style.display = 'none';
+    document.getElementById('captureSection').classList.add('active');
+    document.getElementById('freeformAnswer').value = draft.reflection.slice(0,500);
+    nativeCaptureState = ['pending','uncertain','accepted','rejected'].includes(draft.state) ? draft.state : 'idle';
+    if (nativeCaptureState === 'accepted') finishCapture({mode:window.PURPOSE_CAPTURE_MODE === 'native-mock' ? 'preview' : 'kit'});
+    else submitFreeform();
+  }
+} catch {}
 
 // ═══ SHARE FUNCTIONS ═══
 function getShareText() {
-  return `I just took the Purpose Clarity Assessment by @sprntrl.la and scored ${quizResults.avg}/5.0. My strongest area: ${quizResults.strongest}. The area I'm focusing on next: ${quizResults.weakest}. Take yours: purpose.sprntrl.co`;
+  return 'Take the Purpose Clarity Assessment: https://purpose.sprntrl.co';
 }
 
 function shareToFacebook() {
